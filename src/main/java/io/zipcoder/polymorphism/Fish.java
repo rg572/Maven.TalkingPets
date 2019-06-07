@@ -6,7 +6,7 @@ public class Fish extends Pet {
         super(name);
     }
     public String speak() {
-        return "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fthatgn";
+        return "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn";
     }
 
     public String getType() {

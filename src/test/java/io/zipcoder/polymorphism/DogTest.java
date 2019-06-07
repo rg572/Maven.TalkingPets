@@ -5,26 +5,25 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CatTest {
+public class DogTest {
 
     @Test
     public void speak() {
-        Cat cat = new Cat("Argo");
-        String expected = "Meow";
+        Pet dog = new Dog("Rex Mundi");
+        String expected = "Bark";
 
-        String actual = cat.speak();
+        String actual = dog.speak();
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void getTypeTest(){
-        Cat cat = new Cat("cat");
-        String expected = "cat";
+    public void getType() {
+        Pet dog = new Dog("Rover");
+        String expected = "dog";
 
-        String actual = cat.getType();
+        String actual = dog.getType();
 
         Assert.assertEquals(expected, actual);
     }
-
 }
