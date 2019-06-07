@@ -1,12 +1,11 @@
 package io.zipcoder.polymorphism;
 
-public class Pet {
+public abstract class Pet {
 
     private String name;
-    private String type;
+    //private String type;
 
-    public Pet(String type, String name){
-        this.type = type;
+    public Pet(String name){
         this.name = name;
     }
 
@@ -14,7 +13,11 @@ public class Pet {
         return name;
     }
 
-    public String getType(){
-        return type;
+    public void setName(java.lang.String name) {
+        this.name = name;
     }
+
+    abstract public String speak();
+
+    abstract public String getType();
 }
