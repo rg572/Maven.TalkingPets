@@ -9,7 +9,7 @@ public class CatTest {
 
     @Test
     public void speak() {
-        Cat cat = new Cat("Argo");
+        Pet cat = new Cat("Argo");
         String expected = "Meow";
 
         String actual = cat.speak();

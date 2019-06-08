@@ -12,24 +12,23 @@ public class MainApplication {
 
     private Integer numberOfPets;
     private List<Pet> pets;
+    private UserInputGetter userInput;
 
     public MainApplication() {
 
     }
 
     public void run(){
-        //Scanner sc = new Scanner(System.in);
-        //Boolean validInput = false;
+        userInput = new UserInputGetter(System.in, System.out);
         pets = new ArrayList<>();
 
+        numberOfPets = userInput.getNumberOfPets();
 
-        getNumberOfPets();
-
-        populatePets();
+        populatePets(numberOfPets);
 
         System.out.printf("\nYou have %d pets:\n",numberOfPets);
         for(Pet p : pets){
-            System.out.printf(" A %s named %s\n",p.getType(),p.getName());
+            System.out.printf(" %s says %s\n",p.getName(),p.speak());
         }
     }
 
@@ -49,36 +48,18 @@ public class MainApplication {
         }
     }
 
-    private void getNumberOfPets() {
-        Boolean validInput = false;
-        Scanner sc = new Scanner(System.in);
-        while (!validInput) {
-            System.out.print("Enter the number of pets: ");
-            try {
-                numberOfPets = sc.nextInt();
-                if (numberOfPets < 0) {
-                    System.out.println("I'm not dealing with negative pets");
-                } else {
-                    validInput = true;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Yeah... no. Give me a valid integer");
-                sc.nextLine();
-            }
-        }
-    }
 
-    private void populatePets(){
-        Scanner sc = new Scanner(System.in);
-        for(int i = 0; i < numberOfPets; i++){
-            System.out.printf("What is the name of you %d%s pet?: ",i + 1,getOrdinalSuffix(i + 1));
-            String name = sc.nextLine();
-            addNewPet(name, sc);
+    public void populatePets(Integer petsNumber){
+        userInput = new UserInputGetter(System.in, System.out);
+        for(int i = 0; i < petsNumber; i++){
+            String name = userInput.getUserString(String.format("What is the name of you %d%s pet? ",i+1, getOrdinalSuffix(i+1)));
+            pets.add(userInput.getNewPet(name));
         }
 
     }
 
-    private void addNewPet(String name, Scanner sc){
+    private void addNewPet(String name){
+        Scanner sc = new Scanner(System.in);
         System.out.println("And what kind of pet are they?: ");
         String type;
         while(true){
@@ -100,4 +81,34 @@ public class MainApplication {
             }
         }
     }
+
+    public String getName(int petNumber){
+        Scanner sc = new Scanner(System.in);
+        System.out.printf("What is the name of you %d%s pet?: ",petNumber,getOrdinalSuffix(petNumber));
+        String name = sc.nextLine();
+        sc.close();
+        return name;
+    }
+
+//    public Integer getNumberOfPets() {
+//        Boolean validInput = false;
+//        Scanner sc = new Scanner(System.in);
+//        Integer userNumber = -1;
+//        while (!validInput) {
+//            System.out.print("Enter the number of pets: ");
+//            try {
+//                userNumber = sc.nextInt();
+//                if (userNumber < 0) {
+//                    System.out.println("I'm not dealing with negative pets");
+//                } else {
+//                    validInput = true;
+//                }
+//            } catch (InputMismatchException e) {
+//                System.out.println("Yeah... no. Give me a valid integer");
+//                sc.nextLine();
+//            }
+//        }
+//        return userNumber;
+//    }
+
 }
